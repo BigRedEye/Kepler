@@ -91,9 +91,8 @@ void Widget::mousePressEvent(QMouseEvent *event)
     update(1);
 }
 
-void Widget::updatePlanetsInfo()
+void Widget::updatePlanetsList()
 {
-    for (int i = 0; i<n; ++i)
         
 }
     
@@ -102,6 +101,9 @@ void Widget::updatePlanetInfo()
     ui->currentPlanetGroupBox->setDisabled(isPlaying);
     ui->currentPlanetGroupBox->setTitle(chosenPlanet == -1 ? "New planet" : "Chosen planet");
     ui->colorBox->setTitle((isPlaying ? "" : "Color"));
+    
+    ui->pushButton->setDisabled(chosenPlanet == -1);
+    ui->pushButton_3->setDisabled(chosenPlanet == -1);
     if (chosenPlanet != -1)
     {
         Planet &p = planets[chosenPlanet];
@@ -165,10 +167,14 @@ void Widget::on_pushButton_clicked()
 
 void Widget::on_pushButton_2_clicked()
 {
-    int prevChoise = chosenPlanet;
     chosenPlanet = planets.size();
     planets.push_back(Planet(0,0,0,0,0,0));
     setPlanetInfo();
-    chosenPlanet = prevChoise;
+    update(1);
+}
+
+void Widget::on_pushButton_3_clicked()
+{
+    planets.erase(planets.begin() + chosenPlanet);
     update(1);
 }
