@@ -144,6 +144,8 @@ void Widget::setPlanetInfo()
                      ui->rgbb->value());
     p.name = ui->lineEdit->text();
     
+    ui->listWidget->addItem(p.name);
+    
     update(1);
 }
 
@@ -172,14 +174,20 @@ void Widget::on_pushButton_clicked()
 
 void Widget::on_pushButton_2_clicked()
 {
+    /*for (int i = 0; i<planets.size(); ++i)
+        if (ui->lineEdit->text() == planets[i].name)
+        {
+            ui->lineEdit->setText(ui->lineEdit->text() + QString("1"));
+        }*/
     chosenPlanet = planets.size();
-    planets.push_back(Planet(0,0,0,0,0,0));
+    planets.push_back(Planet(0,0,0,0,0,0,QString("")));
     setPlanetInfo();
     update(1);
 }
 
 void Widget::on_pushButton_3_clicked()
 {
+    ui->listWidget->takeItem(chosenPlanet);
     planets.erase(planets.begin() + chosenPlanet);
     update(1);
 }
