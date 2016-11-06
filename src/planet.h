@@ -8,18 +8,23 @@
 class Planet
 {
 public:
-    Planet(long double x, long double y, long double vx, long double vy, long double r, long double m, QColor color = QColor(rand()%256,rand()%256,rand()%256)):x(x),y(y),vx(vx),vy(vy),r(r),m(m),color(color){
+    Planet(long double x, long double y, long double vx, long double vy, long double r, long double m,
+           QString name = QString(), QColor color = QColor(rand()%256,rand()%256,rand()%256))
+        :  x(x),y(y),vx(vx),vy(vy),r(r),m(m),color(color),name(name)
+    {
         ax = ay = 0;
         
-        if (m >= 100000.)
-            name = "Black Hole";
-        else if (m >= 1000.)
-            name = "Sun";
-        else if (m >= 1.)
-            name = "Planet";
-        else
-            name = "Moon";
-        
+        if (name.size() == 0)
+        {
+            if (m >= 100000.)
+                name = "Black Hole";
+            else if (m >= 1000.)
+                name = "Sun";
+            else if (m >= 1.)
+                name = "Planet";
+            else
+                name = "Moon";
+        }        
     }
     void addForce(long double fx,long double fy);
     void addForce(const Planet &other);

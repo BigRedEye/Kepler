@@ -373,6 +373,16 @@
     </property>
    </widget>
   </widget>
+  <widget class="QListWidget" name="listWidget">
+   <property name="geometry">
+    <rect>
+     <x>810</x>
+     <y>290</y>
+     <width>281</width>
+     <height>251</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>

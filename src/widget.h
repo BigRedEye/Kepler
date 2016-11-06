@@ -7,6 +7,7 @@
 #include <QMouseEvent>
 #include <QLineEdit>
 #include <QVector>
+#include <QListWidgetItem>
 
 #include <vector>
 
@@ -24,46 +25,33 @@ class Widget : public QWidget
 public:
     QTimer *timer;
     QGraphicsScene *scene;
-    
     std::vector<Planet> planets;
-    
     long double camX0,camY0,camX1,camY1;
     
     explicit Widget(QWidget *parent = 0);
-    
     ~Widget();
-    
     void updatePhys(long double dt);
-    
     void updatePlanetInfo();
-    
-    void updatePlanetsList();
-    
     void changePlanetInfo();
-    
     void setPlanetInfo();
+    void addPlanet(const Planet &p);
     
 private:
     bool editing = 0;
-    
     Ui::Widget *ui;
-    
     bool isPlaying = 1;
-    
     int chosenPlanet = -1;
-    
     int frameRate = 100;
+    QVector<QLineEdit> planetList; 
     
-    QVector<QLineEdit> planetList;    
 private slots:
     void update(bool redrawOnly = 0);
-    
     void on_playButton_clicked();
-    
     void mousePressEvent(QMouseEvent *event);
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
     void on_pushButton_3_clicked();
+    void change_current_planet(QListWidgetItem* item);
 };
 
 #endif // WIDGET_H

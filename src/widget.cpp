@@ -17,12 +17,13 @@ Widget::Widget(QWidget *parent) :
     camX0 = -800, camY0 = -600, camX1 = 800, camY1 = 600;
 
     //Planet (x,y,vx,vy,radius,mass,QColor(r,g,b)
-    planets.push_back(Planet(0,0,0,0,100,10000,QColor(255,255,0)));
-    planets.push_back(Planet(200,0,0,7,10,1,QColor(255,0,0)));
-    planets.push_back(Planet(400,0,0,5,10,50,QColor(0,0,255)));
-    planets.push_back(Planet(422,0,0,6.4,3,0.1,QColor(0,255,0)));
+    addPlanet(Planet(0,0,0,0,100,10000,"planet 1",QColor(255,255,0)));
+    addPlanet(Planet(200,0,0,7,10,1,"planet 2",QColor(255,0,0)));
+    addPlanet(Planet(400,0,0,5,10,50,"planet 3",QColor(0,0,255)));
+    addPlanet(Planet(422,0,0,6.4,3,0.1,"planet 4",QColor(0,255,0)));
     
     connect(timer,SIGNAL(timeout()),this,SLOT(update())); //call update every timer tick
+    connect(ui->listWidget,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(change_current_planet(QListWidgetItem*))); //call update every timer tick
     timer->start(1000/frameRate);
 
 }
@@ -49,6 +50,7 @@ void Widget::updatePhys(long double dt)
 void Widget::update(bool redrawOnly)
 {
     scene->clear();
+    
     //fill black
     scene->addRect(0,0,scene->width(),scene->height(),QPen(QColor(0,0,0)),QBrush(QColor(0,0,0)));
     
@@ -62,6 +64,7 @@ void Widget::update(bool redrawOnly)
     for (int i = 0; i<planets.size(); ++i)
     {
         Planet p = planets[i];
+        
         //draw a planet
         QPen pen;
         if (i == chosenPlanet)
@@ -72,7 +75,6 @@ void Widget::update(bool redrawOnly)
                           2 * p.r / dx, 2 * p.r / dy,pen,QBrush(p.color));
     }  
     updatePlanetInfo();
-    updatePlanetsList();
     ui->graphicsView->setScene(scene);
 }
 
@@ -90,12 +92,13 @@ void Widget::mousePressEvent(QMouseEvent *event)
             chosenPlanet = i;
     update(1);
 }
-
-void Widget::updatePlanetsList()
-{
-        
-}
     
+void Widget::addPlanet(const Planet &p)
+{
+    planets.push_back(p);
+    ui->listWidget->addItem(p.name);
+}
+
 void Widget::updatePlanetInfo()
 {
     ui->currentPlanetGroupBox->setDisabled(isPlaying);
@@ -104,6 +107,7 @@ void Widget::updatePlanetInfo()
     
     ui->pushButton->setDisabled(chosenPlanet == -1);
     ui->pushButton_3->setDisabled(chosenPlanet == -1);
+    ui->listWidget->setCurrentRow(chosenPlanet);
     if (chosenPlanet != -1)
     {
         Planet &p = planets[chosenPlanet];
@@ -118,6 +122,7 @@ void Widget::updatePlanetInfo()
         ui->rgbg->setValue(p.color.green());
         ui->rgbb->setValue(p.color.blue());
         
+        ui->listWidget->currentItem()->setText(p.name);
         ui->lineEdit->setText(p.name);
     }
 }
@@ -176,5 +181,13 @@ void Widget::on_pushButton_2_clicked()
 void Widget::on_pushButton_3_clicked()
 {
     planets.erase(planets.begin() + chosenPlanet);
+    update(1);
+}
+
+void Widget::change_current_planet(QListWidgetItem *item)
+{
+    int i = ui->listWidget->row(item);
+    qDebug() << i;
+    chosenPlanet = i;
     update(1);
 }
