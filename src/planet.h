@@ -4,32 +4,18 @@
 #include <QColor>
 #include <QString>
 #include <algorithm>
+#include <deque>
 
 class Planet
 {
 public:
-    Planet(long double x, long double y, long double vx, long double vy, long double r, long double m,
-           QString name = QString(), QColor color = QColor(rand()%256,rand()%256,rand()%256))
-        :  x(x),y(y),vx(vx),vy(vy),r(r),m(m),color(color),name(name)
-    {
-        ax = ay = 0;
-        
-        if (name.size() == 0)
-        {
-            if (m >= 100000.)
-                name = "Black Hole";
-            else if (m >= 1000.)
-                name = "Sun";
-            else if (m >= 1.)
-                name = "Planet";
-            else
-                name = "Moon";
-        }        
-    }
+    Planet(long double x = 0, long double y = 0, long double vx = 0, long double vy = 0, long double r = 0, long double m = 0,
+           QString name = QString(), QColor color = QColor(rand()%256,rand()%256,rand()%256));
     void addForce(long double fx,long double fy);
     void addForce(const Planet &other);
     void update(long double dt);
     
+    bool creating = 0;
     bool destroyed = 0;
     QColor color;
     long double x,y;//real coords
@@ -37,6 +23,9 @@ public:
     long double ax,ay;
     long double vx,vy;//real velocity  
     QString name;
+    std::deque<std::pair<long double, long double> > track;
+    int trackLength = 0;
+    int lastTrackUpdate = 0;
 };
 
 

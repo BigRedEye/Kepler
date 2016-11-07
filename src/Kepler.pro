@@ -14,9 +14,16 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         widget.cpp \
-    planet.cpp
+    planet.cpp \
+    camera.cpp \
+    renderer.cpp \
+    planeteditor.cpp
 
 HEADERS  += widget.h \
-    planet.h
+    planet.h \
+    camera.h \
+    renderer.h \
+    planeteditor.h
 
-FORMS    += widget.ui
+FORMS    += widget.ui \
+    planeteditor.ui

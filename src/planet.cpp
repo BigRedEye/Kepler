@@ -4,6 +4,26 @@
 
 #define G 1
 
+Planet::Planet(long double x, long double y, long double vx, long double vy, long double r, long double m,
+       QString name, QColor color)
+    :  x(x),y(y),vx(vx),vy(vy),r(r),m(m),color(color),name(name)
+{
+    creating = 0;
+    ax = ay = 0;
+    
+    if (name.size() == 0)
+    {
+        if (m >= 100000.)
+            name = "Black Hole";
+        else if (m >= 1000.)
+            name = "Sun";
+        else if (m >= 1.)
+            name = "Planet";
+        else
+            name = "Moon";
+    }  
+}
+
 void Planet::addForce(long double fx,long double fy)
 {
     ax += fx / m;

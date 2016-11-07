@@ -10,6 +10,18 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>1101</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1101</width>
+    <height>600</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Kepler</string>
   </property>
@@ -42,7 +54,7 @@
      <x>810</x>
      <y>0</y>
      <width>281</width>
-     <height>281</height>
+     <height>311</height>
     </rect>
    </property>
    <property name="title">
@@ -313,27 +325,14 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>240</y>
+      <x>50</x>
+      <y>270</y>
       <width>81</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>Apply</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>240</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Create new</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit">
@@ -362,8 +361,8 @@
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>240</y>
+      <x>150</x>
+      <y>270</y>
       <width>81</width>
       <height>31</height>
      </rect>
@@ -372,16 +371,124 @@
      <string>Delete</string>
     </property>
    </widget>
+   <widget class="QSlider" name="trackLen">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>240</y>
+      <width>221</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>50</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>230</y>
+      <width>31</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Track 
+length</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QListWidget" name="listWidget">
    <property name="geometry">
     <rect>
      <x>810</x>
-     <y>290</y>
+     <y>380</y>
      <width>281</width>
-     <height>251</height>
+     <height>161</height>
     </rect>
    </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>810</x>
+     <y>310</y>
+     <width>281</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Camera</string>
+   </property>
+   <widget class="QCheckBox" name="checkBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Fix on planet</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="camX">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>10</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>X:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="camY">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>10</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Y:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="camW">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>30</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>X:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="camH">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>30</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Y:</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
